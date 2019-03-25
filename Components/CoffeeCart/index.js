@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 // NativeBase Components
 import { Text, List, Button } from "native-base";
@@ -21,7 +22,7 @@ class CoffeeCart extends Component {
     ]
   };
   render() {
-    let items = this.state.items;
+    let { items } = this.props;
     let cartItems;
     if (items) {
       cartItems = items.map((item, index) => (
@@ -39,5 +40,9 @@ class CoffeeCart extends Component {
     );
   }
 }
-
-export default CoffeeCart;
+const mapStateToProps = state => {
+  return {
+    items: state.cartReducer.items,
+  };
+};
+export default  connect(mapStateToProps)(CoffeeCart);
